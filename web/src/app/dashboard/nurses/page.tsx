@@ -1,62 +1,26 @@
 // web/src/app/dashboard/nurses/page.tsx
 
-"use client";
-
-import { useEffect, useState } from "react";
-import { api } from "@/lib/api";
-
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import NursesPageClient from "./NursesPageClient";
 
 export default function NursesPage() {
-  const [nurses, setNurses] = useState<any[]>([]);
-
-  useEffect(() => {
-    loadNurses();
-  }, []);
-
-  const searchParams = useSearchParams();
-
-  const specialty = searchParams.get("specialty");
-
-  async function loadNurses() {
-    try {
-      const url = specialty
-        ? `/nurses?specialty=${encodeURIComponent(specialty)}`
-        : "/nurses";
-
-      const res = await api.get(url);
-      setNurses(res.data || []);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   return (
-    <div>
+    <Suspense fallback={<NursesLoading />}>
+      <NursesPageClient />
+    </Suspense>
+  );
+}
 
-      <h1 className="text-3xl font-bold mb-6">
-        Nurses Directory
-      </h1>
+function NursesLoading() {
+  return (
+    <div className="flex min-h-[400px] items-center justify-center">
+      <div className="text-center">
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-emerald-500 border-t-transparent" />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        {nurses.map((nurse) => (
-          <div
-            key={nurse.id}
-            className="bg-white border rounded-xl p-5"
-          >
-            <h2 className="font-bold text-lg">
-              {nurse.user?.firstName} {nurse.user?.lastName}
-            </h2>
-
-            <p className="text-gray-500 mt-2">
-              {nurse.bio}
-            </p>
-          </div>
-        ))}
-
+        <p className="mt-4 text-sm text-slate-500">
+          Loading nurses...
+        </p>
       </div>
-
     </div>
   );
 }
