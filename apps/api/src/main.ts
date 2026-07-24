@@ -6,24 +6,30 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    process.env.FRONTEND_URL,
+  ].filter(Boolean);
+
   app.enableCors({
-    origin: [
-      'http://localhost:3001',
-      'http://localhost:3000',
-    ],
+    origin: allowedOrigins,
     credentials: true,
   });
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
       transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: false,
     }),
   );
 
-  await app.listen(3000);
+  const port = process.env.PORT || 3000;
 
-  console.log('API running on http://localhost:3000');
+  await app.listen(port, '0.0.0.0');
+
+  console.log(`API running on port ${port}`);
 }
 
 bootstrap();
