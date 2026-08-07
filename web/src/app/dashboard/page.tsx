@@ -17,6 +17,7 @@ import {
   Users,
 } from "lucide-react";
 import HeroCarousel from "@/components/dashboard/HeroCarousel";
+import Image from "next/image";
 
 export default function DashboardPage() {
   return ( <div className="min-h-screen bg-[#f6f8f7]">
@@ -130,9 +131,9 @@ export default function DashboardPage() {
             <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-300/10 blur-2xl" />
 
 
-            <div className="relative z-10 p-7 sm:p-9">
+            <div className="relative z-10 grid items-center gap-8 p-7 sm:p-9 lg:grid-cols-[1.2fr_0.8fr]">
 
-
+            <div> 
               {/* Tip Header */}
 
               <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-start">
@@ -222,6 +223,19 @@ export default function DashboardPage() {
                 </button>
 
               </div>
+            </div>
+
+            <div className="relative hidden h-[320px] lg:block">
+
+              <Image
+                src="/images/tod.png"
+                alt="Woman drinking water"
+                fill
+                className="rounded-3xl object-cover object-right shadow-2xl"
+                priority={false}
+              />
+
+            </div>
 
             </div>
 
