@@ -120,7 +120,15 @@ export default function DashboardPage() {
               TODAY'S HEALTH TIP
           ================================================= */}
 
-          <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#064e3b] via-[#047857] to-[#0f766e] text-white shadow-xl">
+          <section className="relative overflow-hidden rounded-[2rem] text-white shadow-xl min-h-[420px]">
+
+            <Image
+              src="/images/tod.png"
+              alt="Drink water"
+              fill
+              className="object-cover object-right"
+              priority={false}
+            />
 
             {/* Decorative circles */}
 
@@ -129,9 +137,10 @@ export default function DashboardPage() {
             <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-white/10" />
 
             <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-300/10 blur-2xl" />
+  
+            <div className="absolute inset-0 bg-gradient-to-r from-[#063b30]/95 via-[#065f46]/75 to-transparent" />
 
-
-            <div className="relative z-10 grid items-center gap-8 p-7 sm:p-9 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="relative z-10 p-7 sm:p-9">
 
             <div> 
               {/* Tip Header */}
@@ -223,23 +232,6 @@ export default function DashboardPage() {
                 </button>
 
               </div>
-            </div>
-
-            <div className="relative hidden h-[330px] lg:block">
-
-                <div className="absolute inset-0 rotate-3 rounded-[2rem] bg-white/10 backdrop-blur-sm" />
-
-                <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-2xl">
-
-                    <Image
-                        src="/images/health-tips/drink-water.webp"
-                        alt="Woman drinking water"
-                        fill
-                        className="object-cover transition duration-700 hover:scale-105"
-                    />
-
-                </div>
-
             </div>
 
             </div>
