@@ -225,15 +225,20 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="relative hidden h-[320px] lg:block">
+            <div className="relative hidden h-[330px] lg:block">
 
-              <Image
-                src="/images/tod.png"
-                alt="Woman drinking water"
-                fill
-                className="rounded-3xl object-cover object-right shadow-2xl"
-                priority={false}
-              />
+                <div className="absolute inset-0 rotate-3 rounded-[2rem] bg-white/10 backdrop-blur-sm" />
+
+                <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-2xl">
+
+                    <Image
+                        src="/images/health-tips/drink-water.webp"
+                        alt="Woman drinking water"
+                        fill
+                        className="object-cover transition duration-700 hover:scale-105"
+                    />
+
+                </div>
 
             </div>
 
