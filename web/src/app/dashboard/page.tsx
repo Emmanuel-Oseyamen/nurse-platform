@@ -129,14 +129,6 @@ export default function DashboardPage() {
               className="object-cover object-right"
               priority={false}
             />
-
-            {/* Decorative circles */}
-
-            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/10" />
-
-            <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-white/10" />
-
-            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-300/10 blur-2xl" />
   
             <div className="absolute inset-0 bg-gradient-to-r from-[#063b30]/95 via-[#065f46]/75 to-transparent" />
 
