@@ -20,9 +20,9 @@ import HeroCarousel from "@/components/dashboard/HeroCarousel";
 import Image from "next/image";
 
 export default function DashboardPage() {
-  return ( <div className="min-h-screen w-full bg-[#f6f8f7]">
+  return ( <div className="min-h-screen bg-[#f6f8f7]">
 
-    <div className="w-full space-y-5 sm:space-y-6 lg:space-y-8">
+    <div className="mx-auto w-full max-w-7xl space-y-6 px-4 py-5 sm:space-y-8 sm:px-6 lg:px-8">
 
         <HeroCarousel />
 
@@ -30,25 +30,25 @@ export default function DashboardPage() {
           MAIN DASHBOARD GRID
       ===================================================== */}
 
-      <div className="grid grid-cols-1 gap-5 sm:gap-6 xl:grid-cols-12">
+      <div className="grid gap-6 xl:grid-cols-12">
 
 
         {/* =================================================
             LEFT COLUMN
         ================================================= */}
 
-        <div className="min-w-0 space-y-5 sm:space-y-6 xl:col-span-8">
+        <div className="space-y-6 xl:col-span-8">
 
 
           {/* =================================================
               ASK QUESTION CARDS
           ================================================= */}
 
-          <section className="grid gap-5 md:grid-cols-2">
+          <section className="grid gap-5 sm:grid-cols-2">
 
             {/* PUBLIC QUESTION */}
 
-            <div className="group relative overflow-hidden rounded-[1.75rem] border border-emerald-100 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div className="group relative on duration-300 hover:-translate-y-1 hover:shadow-xl">
 
               <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-emerald-50 transition group-hover:scale-150" />
 
@@ -82,7 +82,7 @@ export default function DashboardPage() {
 
             {/* PRIVATE QUESTION */}
 
-            <div className="group relative overflow-hidden rounded-[1.75rem] border border-violet-100 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div className="group relative overflow-hidden rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:p-7">
 
               <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-violet-50 transition group-hover:scale-150" />
 
@@ -103,7 +103,7 @@ export default function DashboardPage() {
 
                 <Link
                   href="/dashboard/questions/ask?visibility=PRIVATE"
-                  className="mt-7 inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-violet-700"
+                  className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700 sm:w-fit"
                 >
                   Ask Private Question
                   <ArrowRight size={16} />
@@ -120,13 +120,13 @@ export default function DashboardPage() {
               TODAY'S HEALTH TIP
           ================================================= */}
 
-          <section className="relative overflow-hidden rounded-[2rem] text-white shadow-xl min-h-[500px] sm:min-h-[420px]">
+          <section className="relative overflow-hidden rounded-[2rem] text-white shadow-xl min-h-[420px]">
 
             <Image
               src="/images/tod.png"
               alt="Drink water"
               fill
-              className="object-cover object-[70%_center] sm:object-right"
+              className="object-cover object-right"
               priority={false}
             />
   
@@ -272,7 +272,7 @@ export default function DashboardPage() {
           RIGHT COLUMN
       ================================================= */}
 
-        <div className="min-w-0 space-y-5 sm:space-y-6 xl:col-span-4">
+        <div className="space-y-6 xl:col-span-4">
 
 
         {/* =================================================
