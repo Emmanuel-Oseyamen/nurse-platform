@@ -20,9 +20,9 @@ import HeroCarousel from "@/components/dashboard/HeroCarousel";
 import Image from "next/image";
 
 export default function DashboardPage() {
-  return ( <div className="min-h-screen bg-[#f6f8f7]">
+  return ( <div className="min-h-screen w-full bg-[#f6f8f7]">
 
-    <div className="space-y-8">
+    <div className="w-full space-y-5 sm:space-y-6 lg:space-y-8">
 
         <HeroCarousel />
 
@@ -30,14 +30,14 @@ export default function DashboardPage() {
           MAIN DASHBOARD GRID
       ===================================================== */}
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 gap-5 sm:gap-6 xl:grid-cols-12">
 
 
         {/* =================================================
             LEFT COLUMN
         ================================================= */}
 
-        <div className="col-span-12 space-y-6 xl:col-span-8">
+        <div className="min-w-0 space-y-5 sm:space-y-6 xl:col-span-8">
 
 
           {/* =================================================
@@ -120,13 +120,13 @@ export default function DashboardPage() {
               TODAY'S HEALTH TIP
           ================================================= */}
 
-          <section className="relative overflow-hidden rounded-[2rem] text-white shadow-xl min-h-[420px]">
+          <section className="relative overflow-hidden rounded-[2rem] text-white shadow-xl min-h-[500px] sm:min-h-[420px]">
 
             <Image
               src="/images/tod.png"
               alt="Drink water"
               fill
-              className="object-cover object-right"
+              className="object-cover object-[70%_center] sm:object-right"
               priority={false}
             />
   
@@ -272,7 +272,7 @@ export default function DashboardPage() {
           RIGHT COLUMN
       ================================================= */}
 
-        <div className="col-span-12 space-y-6 xl:col-span-4">
+        <div className="min-w-0 space-y-5 sm:space-y-6 xl:col-span-4">
 
 
         {/* =================================================
