@@ -120,7 +120,7 @@ export default function DashboardPage() {
               TODAY'S HEALTH TIP
           ================================================= */}
 
-          <section className="relative overflow-hidden rounded-[2rem] text-white shadow-xl min-h-[420px]">
+          <section className="relative min-h-[380px] overflow-hidden rounded-3xl text-white shadow-xl sm:min-h-[420px] lg:min-h-[460px]">
 
             <Image
               src="/images/tod.png"
@@ -130,9 +130,9 @@ export default function DashboardPage() {
               priority={false}
             />
   
-            <div className="absolute inset-0 bg-gradient-to-r from-[#063b30]/95 via-[#065f46]/75 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#063b30]/95 via-[#065f46]/80 sm:via-[#065f46]/70 to-transparent" />
 
-            <div className="relative z-10 p-7 sm:p-9">
+            <div className="relative z-10 p-5 sm:p-7 lg:p-9">
 
             <div> 
               {/* Tip Header */}
