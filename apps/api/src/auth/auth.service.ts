@@ -36,8 +36,15 @@ export class AuthService {
       password: hashedPassword,
     });
 
+    const token = await this.jwtService.signAsync({
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    });
+
     return {
       message: 'User created',
+      accessToken: token,
       user,
     };
   }

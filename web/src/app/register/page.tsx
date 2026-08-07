@@ -56,19 +56,29 @@ export default function RegisterPage() {
     try {
       setLoading(true);
 
-      await api.post("/auth/register", {
+      const res = await api.post("/auth/register", {
         firstName,
         lastName,
         email,
         password,
       });
 
-      alert("Account created successfully!");
+      // Save the authentication token
+      const token = res.data?.accessToken;
 
-      router.push("/login");
+      if (!token) {
+        throw new Error( 
+          "Registration succeeded but no authentication token was returned." 
+        ); 
+      }
+      localStorage.setItem("token", token);
+
+      // User is now authenticated — go directly to dashboard
+      router.push("/dashboard");
     } catch (err: any) {
       setError(
         err?.response?.data?.message ??
+          err?.message ??
           "Registration failed."
       );
     } finally {
