@@ -16,58 +16,14 @@ import {
   Star,
   Users,
 } from "lucide-react";
+import HeroCarousel from "@/components/dashboard/HeroCarousel";
 
 export default function DashboardPage() {
   return ( <div className="min-h-screen bg-[#f6f8f7]">
 
     <div className="space-y-8">
 
-      {/* =====================================================
-          WELCOME HEADER
-      ===================================================== */}
-
-        <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-8 py-10 text-white shadow-xl">
-
-        {/* Decorative background */}
-        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/20 blur-3xl" />
-        <div className="absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-teal-500/10 blur-3xl" />
-
-        <div className="relative z-10 flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
-
-          <div>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-emerald-300">
-              <Sparkles size={15} />
-              Your health, your questions, your care
-            </div>
-
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Welcome back, User
-            </h1>
-
-            <p className="mt-3 max-w-xl text-base leading-7 text-slate-300">
-              Get trusted health guidance, connect with qualified nurses,
-              and take the next step toward better health.
-            </p>
-          </div>
-
-          <Link
-            href="/dashboard/questions/ask?visibility=PUBLIC"
-            className="group inline-flex w-fit items-center gap-3 rounded-2xl bg-emerald-500 px-6 py-4 font-semibold text-white shadow-lg shadow-emerald-950/30 transition hover:bg-emerald-400"
-          >
-            <MessageCircle size={20} />
-
-            Ask a Question
-
-            <ArrowRight
-              size={18}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </Link>
-
-        </div>
-
-      </section>
-
+        <HeroCarousel />
 
       {/* =====================================================
           MAIN DASHBOARD GRID
