@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const slides = [
   "/hero/nepox2.png",
-  "/hero/nepox1.png",
+  "/hero/nepox3.png",
 ];
 
 export default function HeroCarousel() {
