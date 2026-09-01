@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -39,10 +40,7 @@ export default function HeroCarousel() {
         lg:min-h-[420px]
       "
     >
-
-      {/* ================================================= */}
       {/* IMAGES */}
-      {/* ================================================= */}
 
       {slides.map((image, index) => (
         <div
@@ -59,30 +57,22 @@ export default function HeroCarousel() {
             }
           `}
         >
-
           <Image
             src={image}
             alt=""
             fill
             priority={index === 0}
-            sizes="
-              (max-width: 640px) 100vw,
-              (max-width: 1024px) 100vw,
-              1600px
-            "
+            sizes="(max-width: 1024px) 100vw, 1600px"
             className="
               object-cover
               object-center
               sm:object-center
             "
           />
-
         </div>
       ))}
 
-      {/* ================================================= */}
       {/* OVERLAY */}
-      {/* ================================================= */}
 
       <div
         className="
@@ -99,9 +89,7 @@ export default function HeroCarousel() {
         "
       />
 
-      {/* ================================================= */}
       {/* CONTENT */}
-      {/* ================================================= */}
 
       <div
         className="
@@ -122,7 +110,6 @@ export default function HeroCarousel() {
           lg:px-12
         "
       >
-
         <span
           className="
             mb-4
@@ -208,17 +195,12 @@ export default function HeroCarousel() {
           "
         >
           <MessageCircle size={19} />
-
           Ask a Question
-
           <ArrowRight size={17} />
         </Link>
-
       </div>
 
-      {/* ================================================= */}
       {/* SLIDE INDICATORS */}
-      {/* ================================================= */}
 
       <div
         className="
@@ -232,13 +214,13 @@ export default function HeroCarousel() {
           gap-2.5
         "
       >
-
         {slides.map((_, index) => (
           <button
             key={index}
             type="button"
             onClick={() => setCurrent(index)}
             aria-label={`Go to slide ${index + 1}`}
+            aria-current={current === index}
             className={`
               h-2.5
               rounded-full
@@ -251,9 +233,7 @@ export default function HeroCarousel() {
             `}
           />
         ))}
-
       </div>
-
     </section>
   );
 }
