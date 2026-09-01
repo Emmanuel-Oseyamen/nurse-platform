@@ -2,345 +2,310 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 
 import {
-LayoutDashboard,
-PenSquare,
-MessageCircle,
-Users,
-Stethoscope,
-BookOpen,
-User,
-Settings,
-LogOut,
-Bell,
-ShieldCheck,
-ChevronRight,
-HeartPulse,
-PhoneCall,
-Menu,
-X,
+  LayoutDashboard,
+  PenSquare,
+  MessageCircle,
+  Users,
+  Stethoscope,
+  BookOpen,
+  User,
+  Settings,
+  LogOut,
+  Bell,
+  ShieldCheck,
+  ChevronRight,
+  HeartPulse,
+  PhoneCall,
+  X,
 } from "lucide-react";
 
-export default function Sidebar() {
-  const pathname = usePathname();
+interface SidebarProps {
+  mobileOpen: boolean;
+  setMobileOpen: (open: boolean) => void;
+}
 
-  const [mobileOpen, setMobileOpen] = useState(false);
+export default function Sidebar({
+  mobileOpen,
+  setMobileOpen,
+}: SidebarProps) {
+  const pathname = usePathname();
   const router = useRouter();
 
   const handleLogout = () => {
-      // Remove authentication token
-      localStorage.removeItem("token");
-
-    // Redirect to login page
-      router.push("/login");
-    };
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
 
   const menu = [
-  {
-    title: "MAIN",
-    items: [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    label: "Nurse Workspace",
-    href: "/dashboard/nurse",
-    icon: Stethoscope,
-  },
-{
-label: "Notifications",
-href: "/dashboard/notifications",
-icon: Bell,
-badge: 3,
-},
-],
-},
-{
-title: "ASK & CONNECT",
-items: [
-{
-label: "Ask a Question",
-href: "/dashboard/questions/ask",
-icon: PenSquare,
-},
-{
-label: "My Questions",
-href: "/dashboard/questions",
-icon: MessageCircle,
-},
-{
-label: "Consultations",
-href: "/dashboard/consultations",
-icon: Users,
-},
-],
-},
-{
-title: "EXPLORE",
-items: [
-{
-label: "Nurses",
-href: "/dashboard/nurses",
-icon: Users,
-},
-{
-label: "Specialties",
-href: "/dashboard/specialties",
-icon: Stethoscope,
-},
-{
-label: "Health Topics",
-href: "/dashboard/health-topics",
-icon: BookOpen,
-},
-],
-},
-{
-title: "ACCOUNT",
-items: [
-{
-label: "Profile",
-href: "/dashboard/profile",
-icon: User,
-},
-{
-label: "Settings",
-href: "/dashboard/settings",
-icon: Settings,
-},
-],
-},
-];
+    {
+      title: "MAIN",
+      items: [
+        {
+          label: "Dashboard",
+          href: "/dashboard",
+          icon: LayoutDashboard,
+        },
+        {
+          label: "Nurse Workspace",
+          href: "/dashboard/nurse",
+          icon: Stethoscope,
+        },
+        {
+          label: "Notifications",
+          href: "/dashboard/notifications",
+          icon: Bell,
+          badge: 3,
+        },
+      ],
+    },
+    {
+      title: "ASK & CONNECT",
+      items: [
+        {
+          label: "Ask a Question",
+          href: "/dashboard/questions/ask",
+          icon: PenSquare,
+        },
+        {
+          label: "My Questions",
+          href: "/dashboard/questions",
+          icon: MessageCircle,
+        },
+        {
+          label: "Consultations",
+          href: "/dashboard/consultations",
+          icon: Users,
+        },
+      ],
+    },
+    {
+      title: "EXPLORE",
+      items: [
+        {
+          label: "Nurses",
+          href: "/dashboard/nurses",
+          icon: Users,
+        },
+        {
+          label: "Specialties",
+          href: "/dashboard/specialties",
+          icon: Stethoscope,
+        },
+        {
+          label: "Health Topics",
+          href: "/dashboard/health-topics",
+          icon: BookOpen,
+        },
+      ],
+    },
+    {
+      title: "ACCOUNT",
+      items: [
+        {
+          label: "Profile",
+          href: "/dashboard/profile",
+          icon: User,
+        },
+        {
+          label: "Settings",
+          href: "/dashboard/settings",
+          icon: Settings,
+        },
+      ],
+    },
+  ];
 
-function closeMobileMenu() {
-setMobileOpen(false);
-}
+  function closeMobileMenu() {
+    setMobileOpen(false);
+  }
 
-function isActive(href: string) {
-if (href === "/dashboard") {
-return pathname === "/dashboard";
-}
+  function isActive(href: string) {
+    if (href === "/dashboard") {
+      return pathname === "/dashboard";
+    }
 
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    );
+  }
 
-return (
-  pathname === href ||
-  pathname.startsWith(`${href}/`)
-);
+  return (
+    <>
+      {/* ================================================= */}
+      {/* MOBILE BACKDROP */}
+      {/* ================================================= */}
 
+      {mobileOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation"
+          onClick={closeMobileMenu}
+          className="
+            fixed
+            inset-0
+            z-40
+            bg-black/60
+            backdrop-blur-sm
+            lg:hidden
+          "
+        />
+      )}
 
-}
+      {/* ================================================= */}
+      {/* DESKTOP SIDEBAR */}
+      {/* ================================================= */}
 
-return (
-<>
-{/* ================================================= */}
-{/* MOBILE TOP BAR */}
-{/* ================================================= */}
+      <aside
+        className="
+          sticky
+          top-0
+          hidden
+          h-screen
+          w-[280px]
+          shrink-0
+          flex-col
+          overflow-hidden
+          border-r
+          border-slate-800
+          bg-[#0B1220]
+          text-white
+          lg:flex
+        "
+      >
+        <SidebarContent
+          menu={menu}
+          isActive={isActive}
+          closeMobileMenu={closeMobileMenu}
+          handleLogout={handleLogout}
+        />
+      </aside>
 
+      {/* ================================================= */}
+      {/* MOBILE SIDEBAR */}
+      {/* ================================================= */}
 
-  <header className="lg:hidden fixed top-0 left-0 right-0 z-40 h-[72px] bg-[#0B1220] border-b border-white/10">
-
-    <div className="h-full px-4 flex items-center justify-between">
-
-      <Link
-        href="/dashboard"
-        onClick={closeMobileMenu}
-        className="flex items-center gap-3"
+      <aside
+        className={`
+          fixed
+          left-0
+          top-0
+          z-50
+          flex
+          h-screen
+          w-[min(290px,85vw)]
+          flex-col
+          overflow-hidden
+          border-r
+          border-white/10
+          bg-[#0B1220]
+          text-white
+          shadow-2xl
+          transition-transform
+          duration-300
+          ease-out
+          lg:hidden
+          ${
+            mobileOpen
+              ? "translate-x-0"
+              : "-translate-x-full"
+          }
+        `}
       >
 
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+        {/* Mobile drawer header */}
 
-          <HeartPulse
-            size={21}
-            strokeWidth={2.5}
+        <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
+
+          <Link
+            href="/dashboard"
+            onClick={closeMobileMenu}
+            className="flex items-center gap-3"
+          >
+
+            <div
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-xl
+                bg-gradient-to-br
+                from-emerald-400
+                to-teal-500
+              "
+            >
+              <HeartPulse size={21} />
+            </div>
+
+            <div>
+
+              <h1 className="text-xl font-bold tracking-tight">
+                Nepox
+              </h1>
+
+              <p className="text-[9px] tracking-widest text-slate-500">
+                HEALTHCARE
+              </p>
+
+            </div>
+
+          </Link>
+
+          <button
+            type="button"
+            onClick={closeMobileMenu}
+            aria-label="Close navigation"
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-xl
+              text-slate-400
+              transition
+              hover:bg-white/10
+              hover:text-white
+            "
+          >
+            <X size={20} />
+          </button>
+
+        </div>
+
+        {/* Navigation */}
+
+        <div className="flex-1 overflow-y-auto px-4 py-6">
+
+          <Navigation
+            menu={menu}
+            isActive={isActive}
+            closeMobileMenu={closeMobileMenu}
           />
 
         </div>
 
-        <div>
+        {/* Emergency */}
 
-          <h1 className="text-xl font-bold tracking-tight text-white">
-            Nepox
-          </h1>
-
-          <p className="text-[9px] text-slate-500 tracking-widest">
-            HEALTHCARE
-          </p>
-
+        <div className="px-4 pb-4">
+          <EmergencyCard />
         </div>
 
-      </Link>
+        {/* Account */}
 
-
-      {/* Mobile menu button */}
-
-      <button
-        type="button"
-        onClick={() =>
-          setMobileOpen(true)
-        }
-        className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/[0.05] border border-white/10 text-slate-300 hover:text-white hover:bg-white/[0.08] transition"
-        aria-label="Open navigation"
-      >
-
-        <Menu size={22} />
-
-      </button>
-
-    </div>
-
-  </header>
-
-
-  {/* ================================================= */}
-  {/* MOBILE BACKDROP */}
-  {/* ================================================= */}
-
-  {mobileOpen && (
-
-    <button
-      type="button"
-      aria-label="Close navigation"
-      onClick={closeMobileMenu}
-      className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-    />
-
-  )}
-
-
-  {/* ================================================= */}
-  {/* DESKTOP SIDEBAR */}
-  {/* ================================================= */}
-
-  <aside className="hidden lg:flex w-[280px] h-screen sticky top-0 flex-col overflow-hidden bg-[#0B1220] text-white border-r border-slate-800">
-
-    <SidebarContent
-      pathname={pathname}
-      menu={menu}
-      isActive={isActive}
-      closeMobileMenu={closeMobileMenu}
-    />
-
-  </aside>
-
-
-  {/* ================================================= */}
-  {/* MOBILE SIDEBAR */}
-  {/* ================================================= */}
-
-  <aside
-    className={`
-      lg:hidden
-      fixed
-      top-0
-      left-0
-      z-50
-      w-[290px]
-      h-screen
-      flex
-      flex-col
-      overflow-hidden
-      bg-[#0B1220]
-      text-white
-      border-r
-      border-white/10
-      shadow-2xl
-      transition-transform
-      duration-300
-      ease-out
-      ${
-        mobileOpen
-          ? "translate-x-0"
-          : "-translate-x-full"
-      }
-    `}
-  >
-
-    {/* Mobile sidebar header */}
-
-    <div className="px-5 py-5 border-b border-white/10 flex items-center justify-between">
-
-      <Link
-        href="/dashboard"
-        onClick={closeMobileMenu}
-        className="flex items-center gap-3"
-      >
-
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
-
-          <HeartPulse size={21} />
-
+        <div className="px-4 pb-5">
+          <AccountFooter
+            handleLogout={handleLogout}
+          />
         </div>
 
-        <div>
-
-          <h1 className="text-xl font-bold">
-            Nepox
-          </h1>
-
-          <p className="text-[9px] text-slate-500 tracking-widest">
-            HEALTHCARE
-          </p>
-
-        </div>
-
-      </Link>
-
-
-      <button
-        type="button"
-        onClick={closeMobileMenu}
-        className="w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition"
-        aria-label="Close navigation"
-      >
-
-        <X size={20} />
-
-      </button>
-
-    </div>
-
-
-    {/* Mobile navigation */}
-
-    <div className="flex-1 overflow-y-auto px-4 py-6">
-
-      <Navigation
-        pathname={pathname}
-        menu={menu}
-        isActive={isActive}
-        closeMobileMenu={closeMobileMenu}
-      />
-
-    </div>
-
-
-    {/* Emergency */}
-
-    <div className="px-4 pb-4">
-
-      <EmergencyCard />
-
-    </div>
-
-
-    {/* Mobile account */}
-
-    <div className="px-4 pb-5">
-
-      <AccountFooter handleLogout={handleLogout} />
-
-    </div>
-
-  </aside>
-
-</>
-
-
-);
+      </aside>
+    </>
+  );
 }
 
 /* ===================================================== */
@@ -348,86 +313,95 @@ return (
 /* ===================================================== */
 
 function SidebarContent({
-pathname,
-menu,
-isActive,
-closeMobileMenu,
-handleLogout,
-}: any) {
-return (
-<>
+  menu,
+  isActive,
+  closeMobileMenu,
+  handleLogout,
+}: {
+  menu: any[];
+  isActive: (href: string) => boolean;
+  closeMobileMenu: () => void;
+  handleLogout: () => void;
+}) {
+  return (
+    <>
 
+      {/* Brand */}
 
-  {/* Brand */}
+      <div className="border-b border-white/10 px-6 pb-6 pt-7">
 
-  <div className="px-6 pt-7 pb-6 border-b border-white/10">
+        <Link
+          href="/dashboard"
+          className="group flex items-center gap-3"
+        >
 
-    <Link
-      href="/dashboard"
-      className="flex items-center gap-3 group"
-    >
+          <div
+            className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+              rounded-2xl
+              bg-gradient-to-br
+              from-emerald-400
+              to-teal-500
+              shadow-lg
+              shadow-emerald-500/20
+              transition-transform
+              group-hover:scale-105
+            "
+          >
+            <HeartPulse
+              size={23}
+              strokeWidth={2.5}
+            />
+          </div>
 
-      <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+          <div>
 
-        <HeartPulse
-          size={23}
-          strokeWidth={2.5}
+            <h1 className="text-2xl font-bold tracking-tight">
+              Nepox
+            </h1>
+
+            <p className="mt-0.5 text-[11px] tracking-wide text-slate-400">
+              HEALTHCARE PLATFORM
+            </p>
+
+          </div>
+
+        </Link>
+
+      </div>
+
+      {/* Navigation */}
+
+      <div className="flex-1 overflow-y-auto px-4 py-6">
+
+        <Navigation
+          menu={menu}
+          isActive={isActive}
+          closeMobileMenu={closeMobileMenu}
         />
 
       </div>
 
-      <div>
+      {/* Emergency */}
 
-        <h1 className="text-2xl font-bold tracking-tight">
-          Nepox
-        </h1>
-
-        <p className="text-[11px] text-slate-400 mt-0.5 tracking-wide">
-          HEALTHCARE PLATFORM
-        </p>
-
+      <div className="px-4 pb-4">
+        <EmergencyCard />
       </div>
 
-    </Link>
+      {/* Account */}
 
-  </div>
+      <div className="px-4 pb-5">
+        <AccountFooter
+          handleLogout={handleLogout}
+        />
+      </div>
 
-
-  {/* Navigation */}
-
-  <div className="flex-1 overflow-y-auto px-4 py-6">
-
-    <Navigation
-      pathname={pathname}
-      menu={menu}
-      isActive={isActive}
-      closeMobileMenu={closeMobileMenu}
-    />
-
-  </div>
-
-
-  {/* Emergency */}
-
-  <div className="px-4 pb-4">
-
-    <EmergencyCard />
-
-  </div>
-
-
-  {/* Account */}
-
-  <div className="px-4 pb-5">
-
-    <AccountFooter handleLogout={handleLogout} />
-
-  </div>
-
-</>
-
-
-);
+    </>
+  );
 }
 
 /* ===================================================== */
@@ -435,142 +409,158 @@ return (
 /* ===================================================== */
 
 function Navigation({
-menu,
-isActive,
-closeMobileMenu,
-}: any) {
-return (
-<>
+  menu,
+  isActive,
+  closeMobileMenu,
+}: {
+  menu: any[];
+  isActive: (href: string) => boolean;
+  closeMobileMenu: () => void;
+}) {
+  return (
+    <>
+      {menu.map((section) => (
+        <div
+          key={section.title}
+          className="mb-7"
+        >
 
+          <div className="mb-2 px-3">
+            <h3 className="text-[10px] font-bold tracking-[0.18em] text-slate-500">
+              {section.title}
+            </h3>
+          </div>
 
-  {menu.map((section: any) => (
+          <div className="space-y-1">
 
-    <div
-      key={section.title}
-      className="mb-7"
-    >
+            {section.items.map((item: any) => {
 
-      <div className="px-3 mb-2">
+              const Icon = item.icon;
+              const active = isActive(item.href);
 
-        <h3 className="text-[10px] font-bold tracking-[0.18em] text-slate-500">
-          {section.title}
-        </h3>
-
-      </div>
-
-
-      <div className="space-y-1">
-
-        {section.items.map((item: any) => {
-
-          const Icon = item.icon;
-
-          const active =
-            isActive(item.href);
-
-          return (
-
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={closeMobileMenu}
-              className={`
-                group relative flex items-center justify-between
-                rounded-2xl px-3.5 py-3
-                transition-all duration-200
-                ${
-                  active
-                    ? "bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-white"
-                    : "text-slate-400 hover:bg-white/[0.05] hover:text-white"
-                }
-              `}
-            >
-
-              {active && (
-
-                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-7 rounded-r-full bg-emerald-400 shadow-lg shadow-emerald-400/40" />
-
-              )}
-
-
-              <div className="flex items-center gap-3">
-
-                <div
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMobileMenu}
                   className={`
-                    flex items-center justify-center
-                    w-9 h-9 rounded-xl
+                    group
+                    relative
+                    flex
+                    min-h-[52px]
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    px-3.5
+                    py-2.5
                     transition-all
+                    duration-200
                     ${
                       active
-                        ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
-                        : "bg-white/[0.04] text-slate-500 group-hover:bg-white/[0.08] group-hover:text-slate-200"
+                        ? "bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-white"
+                        : "text-slate-400 hover:bg-white/[0.05] hover:text-white"
                     }
                   `}
                 >
 
-                  <Icon
-                    size={17}
-                    strokeWidth={
-                      active ? 2.3 : 2
-                    }
-                  />
-
-                </div>
-
-                <span
-                  className={`
-                    text-sm font-medium
-                    ${
-                      active
-                        ? "text-white"
-                        : "text-slate-400 group-hover:text-white"
-                    }
-                  `}
-                >
-                  {item.label}
-                </span>
-
-              </div>
-
-
-              <div className="flex items-center">
-
-                {item.badge && (
-
-                  <span className="min-w-5 h-5 px-1.5 flex items-center justify-center rounded-full bg-emerald-500 text-[10px] font-bold text-white">
-                    {item.badge}
-                  </span>
-
-                )}
-
-                {active &&
-                  !item.badge && (
-
-                    <ChevronRight
-                      size={15}
-                      className="text-emerald-400"
+                  {active && (
+                    <span
+                      className="
+                        absolute
+                        left-0
+                        top-1/2
+                        h-7
+                        w-1
+                        -translate-y-1/2
+                        rounded-r-full
+                        bg-emerald-400
+                        shadow-lg
+                        shadow-emerald-400/40
+                      "
                     />
-
                   )}
 
-              </div>
+                  <div className="flex items-center gap-3">
 
-            </Link>
+                    <div
+                      className={`
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-xl
+                        transition-all
+                        ${
+                          active
+                            ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
+                            : "bg-white/[0.04] text-slate-500 group-hover:bg-white/[0.08] group-hover:text-slate-200"
+                        }
+                      `}
+                    >
+                      <Icon
+                        size={17}
+                        strokeWidth={active ? 2.3 : 2}
+                      />
+                    </div>
 
-          );
+                    <span
+                      className={`
+                        text-sm font-medium
+                        ${
+                          active
+                            ? "text-white"
+                            : "text-slate-400 group-hover:text-white"
+                        }
+                      `}
+                    >
+                      {item.label}
+                    </span>
 
-        })}
+                  </div>
 
-      </div>
+                  <div className="flex items-center">
 
-    </div>
+                    {item.badge && (
+                      <span
+                        className="
+                          flex
+                          h-5
+                          min-w-5
+                          items-center
+                          justify-center
+                          rounded-full
+                          bg-emerald-500
+                          px-1.5
+                          text-[10px]
+                          font-bold
+                          text-white
+                        "
+                      >
+                        {item.badge}
+                      </span>
+                    )}
 
-  ))}
+                    {active && !item.badge && (
+                      <ChevronRight
+                        size={15}
+                        className="text-emerald-400"
+                      />
+                    )}
 
-</>
+                  </div>
 
+                </Link>
+              );
+            })}
 
-);
+          </div>
+
+        </div>
+      ))}
+    </>
+  );
 }
 
 /* ===================================================== */
@@ -578,65 +568,102 @@ return (
 /* ===================================================== */
 
 function EmergencyCard() {
-return ( <div className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-teal-500/5 p-4">
+  return (
+    <div
+      className="
+        relative
+        overflow-hidden
+        rounded-2xl
+        border
+        border-emerald-500/20
+        bg-gradient-to-br
+        from-emerald-500/10
+        to-teal-500/5
+        p-4
+      "
+    >
 
+      <div
+        className="
+          absolute
+          -right-8
+          -top-8
+          h-24
+          w-24
+          rounded-full
+          bg-emerald-500/10
+          blur-2xl
+        "
+      />
 
-  <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-emerald-500/10 blur-2xl" />
+      <div className="relative">
 
-  <div className="relative">
+        <div className="mb-3 flex items-center gap-2">
 
-    <div className="flex items-center gap-2 mb-3">
+          <div
+            className="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-xl
+              bg-emerald-500/15
+            "
+          >
+            <ShieldCheck
+              size={16}
+              className="text-emerald-400"
+            />
+          </div>
 
-      <div className="w-8 h-8 rounded-xl bg-emerald-500/15 flex items-center justify-center">
+          <span className="text-xs font-semibold text-emerald-300">
+            Emergency Support
+          </span>
 
-        <ShieldCheck
-          size={16}
-          className="text-emerald-400"
-        />
-
-      </div>
-
-      <span className="text-xs font-semibold text-emerald-300">
-        Emergency Support
-      </span>
-
-    </div>
-
-    <p className="text-[11px] leading-5 text-slate-400">
-      For medical emergencies, contact emergency services immediately.
-    </p>
-
-    <div className="flex items-center justify-between mt-4">
-
-      <div>
-
-        <div className="text-2xl font-bold text-white">
-          112
         </div>
 
-        <div className="text-[10px] text-slate-500">
-          Emergency Services
+        <p className="text-[11px] leading-5 text-slate-400">
+          For medical emergencies, contact emergency
+          services immediately.
+        </p>
+
+        <div className="mt-4 flex items-center justify-between">
+
+          <div>
+
+            <div className="text-2xl font-bold text-white">
+              112
+            </div>
+
+            <div className="text-[10px] text-slate-500">
+              Emergency Services
+            </div>
+
+          </div>
+
+          <div
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-xl
+              bg-emerald-500/10
+            "
+          >
+            <PhoneCall
+              size={16}
+              className="text-emerald-400"
+            />
+          </div>
+
         </div>
 
       </div>
-
-      <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-
-        <PhoneCall
-          size={16}
-          className="text-emerald-400"
-        />
-
-      </div>
-
     </div>
-
-  </div>
-
-</div>
-
-
-);
+  );
 }
 
 /* ===================================================== */
@@ -648,52 +675,84 @@ function AccountFooter({
 }: {
   handleLogout: () => void;
 }) {
-return ( <div className="border-t border-white/10 pt-4">
+  return (
+    <div className="border-t border-white/10 pt-4">
 
+      <Link
+        href="/dashboard/profile"
+        className="
+          group
+          flex
+          min-w-0
+          items-center
+          gap-3
+          px-2
+        "
+      >
 
-  <div className="flex items-center justify-between gap-3 px-2">
+        <div
+          className="
+            flex
+            h-10
+            w-10
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            border
+            border-white/10
+            bg-gradient-to-br
+            from-slate-600
+            to-slate-700
+          "
+        >
+          <User
+            size={18}
+            className="text-slate-300"
+          />
+        </div>
 
-    <Link
-      href="/dashboard/profile"
-      className="flex items-center gap-3 min-w-0 group"
-    >
+        <div className="min-w-0">
 
-      <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center border border-white/10">
+          <p className="truncate text-sm font-semibold text-white">
+            My Account
+          </p>
 
-        <User
-          size={18}
-          className="text-slate-300"
-        />
+          <p className="truncate text-[11px] text-slate-500">
+            Manage your profile
+          </p>
 
-      </div>
+        </div>
 
-      <div className="min-w-0">
+      </Link>
 
-        <p className="text-sm font-semibold text-white truncate">
-          My Account
-        </p>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="
+          mt-4
+          flex
+          min-h-[46px]
+          w-full
+          items-center
+          justify-center
+          gap-2
+          rounded-xl
+          border
+          border-white/10
+          text-sm
+          font-medium
+          text-slate-400
+          transition
+          hover:border-red-400/30
+          hover:bg-red-500/10
+          hover:text-red-400
+        "
+      >
+        <LogOut size={18} />
+        Logout
+      </button>
 
-        <p className="text-[11px] text-slate-500 truncate">
-          Manage your profile
-        </p>
-
-      </div>
-
-    </Link>
-
-
-    <button
-      onClick={handleLogout}
-      className="w-full mt-4 flex items-center justify-center gap-2 border rounded-xl py-3 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all"
-    >
-      <LogOut size={18} />
-      Logout
-    </button>
-
-  </div>
-
-</div>
-
-
-);
+    </div>
+  );
 }

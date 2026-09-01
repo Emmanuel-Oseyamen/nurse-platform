@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Topbar from "@/components/dashboard/Topbar";
 
@@ -8,25 +9,51 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f6f8f7]">
+    <div className="flex min-h-screen bg-[#f6f8f7]">
 
-      {/* Sidebar */}
-      <Sidebar />
+      {/* ================================================= */}
+      {/* SIDEBAR */}
+      {/* ================================================= */}
 
-      {/* Main Content */}
+      <Sidebar
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
+      />
+
+      {/* ================================================= */}
+      {/* MAIN APPLICATION */}
+      {/* ================================================= */}
+
       <div className="flex min-w-0 flex-1 flex-col">
 
-        {/* Top Navigation */}
-        <Topbar />
+        {/* Topbar / Mobile Header */}
+        <Topbar
+          onOpenMenu={() => setMobileOpen(true)}
+        />
 
-        {/* Page */}
-        <main className="flex-1 overflow-y-auto">
+        {/* ================================================= */}
+        {/* PAGE CONTENT */}
+        {/* ================================================= */}
 
-          <div className="mx-auto w-full max-w-[1600px] px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+        <main className="min-w-0 flex-1 overflow-y-auto">
 
+          <div
+            className="
+              mx-auto
+              w-full
+              max-w-[1600px]
+              px-4
+              py-4
+              sm:px-6
+              sm:py-6
+              lg:px-8
+              lg:py-8
+            "
+          >
             {children}
-
           </div>
 
         </main>
