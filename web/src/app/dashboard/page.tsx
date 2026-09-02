@@ -554,7 +554,7 @@ export default function DashboardPage() {
                   </h3>
 
                   <p className="mt-2 text-sm leading-6 text-slate-500">
-                    NurseQ&A provides health information
+                    Nepox provides health information
                     and general guidance. It does not
                     replace professional medical diagnosis
                     or emergency medical care. If you are
@@ -955,7 +955,7 @@ function HowItWorks() {
       <div className="mb-5">
 
         <h3 className="text-xl font-bold text-slate-900">
-          How NurseQ&A Works
+          How Nepox Works
         </h3>
 
         <p className="mt-1 text-sm text-slate-500">
