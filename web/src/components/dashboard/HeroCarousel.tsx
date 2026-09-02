@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 const slides = [
   "/hero/nepox4.png",
-  "/hero/nepox3.png",
+  "/hero/nepox5.png",
 ];
 
 export default function HeroCarousel() {
@@ -167,37 +167,7 @@ export default function HeroCarousel() {
           healthcare support.
         </p>
 
-        <Link
-          href="/dashboard/questions/ask?visibility=PUBLIC"
-          className="
-            mt-6
-            inline-flex
-            min-h-[50px]
-            w-fit
-            items-center
-            gap-2.5
-            rounded-2xl
-            bg-emerald-600
-            px-5
-            py-3
-            text-sm
-            font-semibold
-            text-white
-            shadow-lg
-            shadow-black/10
-            transition
-            active:scale-[0.98]
-            hover:bg-emerald-500
-            sm:mt-7
-            sm:px-6
-            sm:py-3.5
-            sm:text-base
-          "
-        >
-          <MessageCircle size={19} />
-          Ask a Question
-          <ArrowRight size={17} />
-        </Link>
+        
       </div>
 
       {/* SLIDE INDICATORS */}
