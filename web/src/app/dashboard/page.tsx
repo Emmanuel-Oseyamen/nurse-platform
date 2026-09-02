@@ -746,7 +746,7 @@ function FeaturedNurse() {
         <div className="-mt-10 flex justify-center sm:-mt-12">
 
           <img
-            src="https://i.pravatar.cc/200?img=47"
+            src="/images/avatar.jpg"
             alt="Cynthia Anigala"
             className="
               h-20
