@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 
 const slides = [
-  "/hero/nepox2.png",
+  "/hero/nepox4.png",
   "/hero/nepox3.png",
 ];
 
